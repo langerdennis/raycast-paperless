@@ -24,7 +24,7 @@ export const DocListItem = ({
   return (
     <List.Item
       title={result.title}
-      icon={Icon.ArrowRight}
+      icon={Icon.TextDocument}
       actions={
         <ActionPanel>
           <Action.OpenInBrowser
