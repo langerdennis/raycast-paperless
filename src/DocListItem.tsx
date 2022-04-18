@@ -7,6 +7,13 @@ import {
 } from '@raycast/api'
 import { paperlessResults } from './paperlessResponse.model'
 
+export interface Preferences {
+  paperlessURL: string;
+  apiToken: string;
+}
+
+const { paperlessURL }: Preferences = getPreferenceValues();
+
 interface DocListItemProps {
   result: paperlessResults
 }
@@ -14,28 +21,15 @@ interface DocListItemProps {
 export const DocListItem = ({
   result,
 }: DocListItemProps): JSX.Element => {
-  const actions = {
-    documentPage: (
-      <Action.OpenInBrowser
-        key="docUrl"
-        url={`https://bild.de`}
-        icon={{
-          source: 'command-icon.png',
-        }}
-      />
-    ),
-  }
-
   return (
     <List.Item
-      id={result.id}
       title={result.title}
       icon={Icon.ArrowRight}
       actions={
         <ActionPanel>
           <Action.OpenInBrowser
-            url={`https://www.bild.de`}
-            title="Paperless Search Results"
+            url={`http://${paperlessURL}/documents/${result.id}`}
+            title="Open in Browser"
           />
         </ActionPanel>
       }

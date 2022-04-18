@@ -8,7 +8,7 @@ export interface paperlessResultModel {
 }
 
 export interface paperlessResults {
-  id: string
+  id: number
   correspondent?: string
   document_type?: string
   title: string

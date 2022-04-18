@@ -1,11 +1,11 @@
 import { List } from "@raycast/api";
 import { useState } from 'react'
-import { paperlessFetchResponse } from "./paperlessResponse.model";
+import { paperlessFetchResponse, paperlessResults } from "./paperlessResponse.model";
 import { fetchDocuments } from './utils/fetchDocuments'
 import { DocListItem } from './DocListItem'
 
 export default function DocumentList() {
-  const [results, setResults] = useState<paperlessFetchResponse>([])
+  const [results, setResults] = useState<paperlessFetchResponse>()
   const [loading, setLoading] = useState<boolean>(false)
 
   const onSearchTextChange = async (text: string) => {
@@ -22,9 +22,9 @@ export default function DocumentList() {
     onSearchTextChange={onSearchTextChange}
     throttle
   >
-      {results?.length
-        ? results.map((result) => {
-            return <DocListItem key={result.title} result={result} />
+      {results?.results.length
+        ? results.results.map((result) => {
+            return <DocListItem key={result.id} result={result} />
           })
         : null}
     </List>

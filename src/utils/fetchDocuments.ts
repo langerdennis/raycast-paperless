@@ -1,6 +1,6 @@
 import { getPreferenceValues, showToast, Toast } from '@raycast/api'
 import fetch from 'node-fetch'
-import { paperlessFetchResponse, paperlessResults } from '../paperlessResponse.model'
+import { paperlessFetchResponse } from '../paperlessResponse.model'
 
 export interface Preferences {
     paperlessURL: string;
@@ -23,6 +23,6 @@ export interface Preferences {
   } catch (error) {
     console.error(error)
     showToast(Toast.Style.Failure, 'Could not fetch documents')
-    return Promise.resolve([])
+    return Promise.reject([])
   }
 }
