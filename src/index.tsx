@@ -1,24 +1,32 @@
-import { getPreferenceValues, ActionPanel, Detail, List, Action } from "@raycast/api";
+import { List } from "@raycast/api";
+import { useState } from 'react'
+import { paperlessFetchResponse } from "./paperlessResponse.model";
+import { fetchDocuments } from './utils/fetchDocuments'
+import { DocListItem } from './DocListItem'
 
-export interface Preferences {
-  paperlessURL: string;
-  apiToken: string;
-}
-const { paperlessURL }: Preferences = getPreferenceValues();
-const { apiToken }: Preferences = getPreferenceValues();
+export default function DocumentList() {
+  const [results, setResults] = useState<paperlessFetchResponse>([])
+  const [loading, setLoading] = useState<boolean>(false)
 
-export default function Command() {
+  const onSearchTextChange = async (text: string) => {
+    setLoading(true)
+    const response = await fetchDocuments(text.replace(/\s/g, '+'))
+    setResults(response)
+    setLoading(false)
+  }
+
   return (
-    <List>
-      <List.Item
-        icon="list-icon.png"
-        title="Hi there"
-        actions={
-          <ActionPanel>
-            <Action.Push title="Show Details" target={<Detail markdown="# Hey!👋" />} />
-          </ActionPanel>
-        }
-      />
+    <List
+    isLoading={loading}
+    searchBarPlaceholder={`Search documents, like "Steuer"…`}
+    onSearchTextChange={onSearchTextChange}
+    throttle
+  >
+      {results?.length
+        ? results.map((result) => {
+            return <DocListItem key={result.title} result={result} />
+          })
+        : null}
     </List>
   );
 }
