@@ -1,6 +1,6 @@
 # Paperless-ngx extension for Raycast launcher on Mac
 
-A simple extension to query a self-hosted instance of [Paperless-ngx](https://github.com/paperless-ngx/paperless-ngx) for uploaded document using the API. The only action currently implemented is to directly open the document page in a browser.
+A simple extension to query a self-hosted instance of [Paperless-ngx](https://github.com/paperless-ngx/paperless-ngx) for uploaded documents using the API. The only follow-up action currently implemented is to directly open the document page in a browser.
 
 Additional functionality like thumbnail previews, editing of metadata etc. could be implemented.
 
