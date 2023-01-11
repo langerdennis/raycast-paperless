@@ -1,6 +1,6 @@
 import {getPreferenceValues, showToast, Toast, Cache} from '@raycast/api';
 import fetch from 'node-fetch';
-import {paperlessCorrespondentResults, paperlessCorrespondentsResponse} from '../paperlessResponse.model';
+import {paperlessCorrespondentResults, paperlessCorrespondentsResponse} from '../models/paperlessResponse.model';
 import {Preferences} from './fetchDocuments';
 
 const {paperlessURL}: Preferences = getPreferenceValues();

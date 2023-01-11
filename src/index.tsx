@@ -1,6 +1,6 @@
 import { List } from "@raycast/api";
 import { useState } from 'react'
-import { paperlessFetchResponse } from "./paperlessResponse.model";
+import { paperlessFetchResponse } from "./models/paperlessResponse.model";
 import { fetchDocuments } from './utils/fetchDocuments'
 import { DocListItem } from './DocListItem'
 
