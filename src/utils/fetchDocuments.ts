@@ -14,7 +14,7 @@ export interface Preferences {
 ): Promise<paperlessFetchResponse> => {
   try {
     const response = await fetch(
-        `http://${paperlessURL}/api/documents/?query=${searchTerm}`, {
+        `${paperlessURL}/api/documents/?query=${searchTerm}`, {
             headers: {'Authorization': `Token ${apiToken}`}
         }
     )
