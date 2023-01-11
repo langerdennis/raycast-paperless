@@ -2,7 +2,7 @@ import { List } from "@raycast/api";
 import { useState } from 'react'
 import { paperlessFetchResponse } from "./models/paperlessResponse.model";
 import { fetchDocuments } from './utils/fetchDocuments'
-import { DocListItem } from './DocListItem'
+import { DocListItem } from './components/DocListItem'
 
 export default function DocumentList() {
   const [results, setResults] = useState<paperlessFetchResponse>()

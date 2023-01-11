@@ -5,13 +5,13 @@ import {
   Action,
   getPreferenceValues,
 } from '@raycast/api'
-import { paperlessResults } from './paperlessResponse.model'
-import { Preferences } from './preferences.model';
+import {paperlessDocumentResults} from '../models/paperlessResponse.model';
+import { Preferences } from '../models/preferences.model';
 
 const { paperlessURL }: Preferences = getPreferenceValues();
 
 interface DocListItemProps {
-  result: paperlessResults
+  result: paperlessDocumentResults
 }
 
 export const DocListItem = ({
