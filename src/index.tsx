@@ -1,33 +1,39 @@
-import { List } from "@raycast/api";
-import { useState } from 'react'
-import {paperlessCorrespondentsResponse, paperlessDocumentResults, paperlessDocumentTagsResponse, paperlessDocumentTypesResponse, paperlessFetchResponse } from "./models/paperlessResponse.model";
-import { fetchDocuments } from './utils/fetchDocuments'
-import { DocListItem } from './components/DocListItem'
-import { fetchDocumentTags } from "./utils/fetchDocumentTags";
-import { fetchDocumentTypes } from "./utils/fetchDocumentTypes";
+import {List} from '@raycast/api';
+import {useState} from 'react';
+import {
+    paperlessCorrespondentsResponse,
+    paperlessDocumentResults,
+    paperlessDocumentTagsResponse,
+    paperlessDocumentTypesResponse,
+    paperlessFetchResponse
+} from './models/paperlessResponse.model';
+import {fetchDocuments} from './utils/fetchDocuments';
+import {DocListItem} from './components/DocListItem';
+import {fetchDocumentTags} from './utils/fetchDocumentTags';
+import {fetchDocumentTypes} from './utils/fetchDocumentTypes';
 import {fetchCorrespondents} from './utils/fetchCorrespondents';
 
 export default function DocumentList() {
-  const [results, setResults] = useState<paperlessFetchResponse>()
-  const [tags, setTags] = useState<paperlessDocumentTagsResponse>();
-  const [types, setTypes] = useState<paperlessDocumentTypesResponse>();
-  const [correspondents, setCorrespondents] = useState<paperlessCorrespondentsResponse>();
-  const [loading, setLoading] = useState<boolean>(false)
+    const [results, setResults] = useState<paperlessFetchResponse>();
+    const [tags, setTags] = useState<paperlessDocumentTagsResponse>();
+    const [types, setTypes] = useState<paperlessDocumentTypesResponse>();
+    const [correspondents, setCorrespondents] = useState<paperlessCorrespondentsResponse>();
+    const [loading, setLoading] = useState<boolean>(false);
 
-  const onSearchTextChange = async (text: string) => {
-    setLoading(true)
-    const response = await fetchDocuments(text.replace(/\s/g, '+'))
-    setResults(response)
-      const documentResponse = await fetchDocuments(text.replace(/\s/g, '+'));
-      setResults(documentResponse);
-      const documentTagsResponse = await fetchDocumentTags();
-      setTags(documentTagsResponse);
-      const documentTypesResponse = await fetchDocumentTypes();
-      setTypes(documentTypesResponse);
-      const correspondentsResponse = await fetchCorrespondents();
-      setCorrespondents(correspondentsResponse);
-    setLoading(false)
-  }
+    const onSearchTextChange = async (text: string) => {
+        setLoading(true);
+        const response = await fetchDocuments(text.replace(/\s/g, '+'));
+        setResults(response);
+        const documentResponse = await fetchDocuments(text.replace(/\s/g, '+'));
+        setResults(documentResponse);
+        const documentTagsResponse = await fetchDocumentTags();
+        setTags(documentTagsResponse);
+        const documentTypesResponse = await fetchDocumentTypes();
+        setTypes(documentTypesResponse);
+        const correspondentsResponse = await fetchCorrespondents();
+        setCorrespondents(correspondentsResponse);
+        setLoading(false);
+    };
 
     const getCorrespondent = (doc: paperlessDocumentResults) => {
         if (correspondents) {
@@ -59,24 +65,24 @@ export default function DocumentList() {
         }
     };
 
-  return (
-    <List
-    isLoading={loading}
-    isShowingDetail={true}
-    searchBarPlaceholder={`Search documents, like "Steuer"…`}
-    onSearchTextChange={onSearchTextChange}
-    throttle
-  >
-      {results?.results.length
-        ? results.results.map((document) => {
-            return <DocListItem
+    return (
+        <List
+            isLoading={loading}
+            isShowingDetail={true}
+            searchBarPlaceholder={`Search documents, like "Steuer"…`}
+            onSearchTextChange={onSearchTextChange}
+            throttle
+        >
+            {results?.results.length
+                ? results.results.map((document) => {
+                    return <DocListItem
                         key={document.id}
                         document={document}
                         type={getDocumentType(document)}
                         correspondent={getCorrespondent(document)}
-                        tags={stringifyTags(document)}/>
-          })
-        : null}
-    </List>
-  );
+                        tags={stringifyTags(document)}/>;
+                })
+                : null}
+        </List>
+    );
 }
