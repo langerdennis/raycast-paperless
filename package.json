@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "@raycast/api": "^1.45.3",
+    "axios": "^1.2.2",
     "moment": "^2.29.4"
   },
   "devDependencies": {
