@@ -49,6 +49,33 @@
       "type": "password",
       "default": "",
       "required": true
+    },
+    {
+      "name": "dateFormat",
+      "title": "Date format",
+      "description": "Choose the date format",
+      "type": "dropdown",
+      "data": [
+        {
+          "title": "YYYY-MM-DD 12:mm",
+          "value": "YYYY-MM-DD HH:MM"
+        },
+        {
+          "title": "DD.MM.YYYY 24:mm",
+          "value": "DD.MM.YYYY HH:MM"
+        },
+        {
+          "title": "DD/MM/YYYY 24:mm",
+          "value": "DD/MM/YYYY HH:MM"
+        },
+        {
+          "title": "MM/DD/YYYY 12:mm",
+          "value": "MM/DD/YYYY  hh:MM"
+        }
+      ],
+      "default": false,
+      "required": true,
+      "label": "Choose the date format"
     }
   ],
   "scripts": {
