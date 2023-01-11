@@ -23,8 +23,8 @@ export default function DocumentList() {
     throttle
   >
       {results?.results.length
-        ? results.results.map((result) => {
-            return <DocListItem key={result.id} result={result} />
+        ? results.results.map((document) => {
+            return <DocListItem key={document.id} document={document} />
           })
         : null}
     </List>
