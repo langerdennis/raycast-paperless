@@ -18,7 +18,7 @@ export const fetchDocuments = async (
         const json = await response.json();
         return json as paperlessFetchResponse;
     } catch (error) {
-        showToast(Toast.Style.Failure, `Could not fetch documents ${error}`);
+        await showToast(Toast.Style.Failure, `Could not fetch documents ${error}`);
         return Promise.reject([]);
     }
 };

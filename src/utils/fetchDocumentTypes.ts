@@ -20,7 +20,7 @@ export const fetchDocumentTypes = async (): Promise<paperlessDocumentTypesRespon
         await cacheDocumentTypes(types.results);
         return types;
     } catch (error) {
-        showToast(Toast.Style.Failure, `Could not fetch documents types ${error}`);
+        await showToast(Toast.Style.Failure, `Could not fetch documents types ${error}`);
         return Promise.reject([]);
     }
 };

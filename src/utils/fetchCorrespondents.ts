@@ -1,7 +1,7 @@
 import {getPreferenceValues, showToast, Toast, Cache} from '@raycast/api';
 import fetch from 'node-fetch';
 import {paperlessCorrespondentResults, paperlessCorrespondentsResponse} from '../models/paperlessResponse.model';
-import {Preferences} from './fetchDocuments';
+import { Preferences } from '../models/preferences.model';
 
 const {paperlessURL}: Preferences = getPreferenceValues();
 const {apiToken}: Preferences = getPreferenceValues();
@@ -20,7 +20,7 @@ export const fetchCorrespondents = async (): Promise<paperlessCorrespondentsResp
         await cacheCorrespondents(correspondents.results);
         return correspondents;
     } catch (error) {
-        showToast(Toast.Style.Failure, `Could not fetch correspondents ${error}`);
+        await showToast(Toast.Style.Failure, `Could not fetch correspondents ${error}`);
         return Promise.reject([]);
     }
 };

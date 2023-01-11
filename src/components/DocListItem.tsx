@@ -1,18 +1,10 @@
-import {
-    List,
-    Icon,
-    ActionPanel,
-    Action,
-    getPreferenceValues,
-    environment,
-} from '@raycast/api';
-import {paperlessDocumentResults} from '../models/paperlessResponse.model';
+import {environment, getPreferenceValues, Icon, List,} from '@raycast/api';
 import {Preferences} from '../models/preferences.model';
 import {DocActions} from './DocActions';
 import {DocItem} from '../models/docItem.model';
 import moment from 'moment';
 import fs from 'fs';
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import axios from 'axios';
 
 const {apiToken}: Preferences = getPreferenceValues();
