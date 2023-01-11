@@ -1,11 +1,8 @@
 import { getPreferenceValues, showToast, Toast } from '@raycast/api'
 import fetch from 'node-fetch'
 import { paperlessFetchResponse } from '../paperlessResponse.model'
+import { Preferences } from '../preferences.model';
 
-export interface Preferences {
-    paperlessURL: string;
-    apiToken: string;
-  }
   const { paperlessURL }: Preferences = getPreferenceValues();
   const { apiToken }: Preferences = getPreferenceValues();
 

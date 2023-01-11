@@ -6,11 +6,7 @@ import {
   getPreferenceValues,
 } from '@raycast/api'
 import { paperlessResults } from './paperlessResponse.model'
-
-export interface Preferences {
-  paperlessURL: string;
-  apiToken: string;
-}
+import { Preferences } from './preferences.model';
 
 const { paperlessURL }: Preferences = getPreferenceValues();
 
