@@ -1,34 +1,28 @@
 import {
-  List,
-  Icon,
-  ActionPanel,
-  Action,
-  getPreferenceValues,
-} from '@raycast/api'
+    List,
+    Icon,
+    ActionPanel,
+    Action,
+    getPreferenceValues,
+} from '@raycast/api';
 import {paperlessDocumentResults} from '../models/paperlessResponse.model';
-import { Preferences } from '../models/preferences.model';
+import {Preferences} from '../models/preferences.model';
+import {DocActions} from './DocActions';
 
-const { paperlessURL }: Preferences = getPreferenceValues();
+const {paperlessURL}: Preferences = getPreferenceValues();
 
 interface DocListItemProps {
-  result: paperlessDocumentResults
+    document: paperlessDocumentResults;
 }
 
-export const DocListItem = ({
-  result,
-}: DocListItemProps): JSX.Element => {
-  return (
-    <List.Item
-      title={result.title}
-      icon={Icon.TextDocument}
-      actions={
-        <ActionPanel>
-          <Action.OpenInBrowser
-            url={`http://${paperlessURL}/documents/${result.id}`}
-            title="Open in Browser"
-          />
-        </ActionPanel>
-      }
-    />
-  )
-}
+export const DocListItem = ({document}: DocListItemProps): JSX.Element => {
+    return (
+        <List.Item
+            title={document.title}
+            icon={Icon.Document}
+            actions={
+                <DocActions document={document}/>
+            }
+        />
+    );
+};
