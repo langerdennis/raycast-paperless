@@ -52,6 +52,15 @@
       "required": true
     },
     {
+      "name": "gridMode",
+      "title": "Grid Mode",
+      "description": "Display documents in Grid instead of List",
+      "type": "checkbox",
+      "default": false,
+      "required": true,
+      "label": "Enable Grid View"
+    },
+    {
       "name": "dateFormat",
       "title": "Date format",
       "description": "Choose the date format",
