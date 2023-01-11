@@ -1,4 +1,4 @@
-import {List} from '@raycast/api';
+import {getPreferenceValues, Grid, List} from '@raycast/api';
 import {useState} from 'react';
 import {
     paperlessCorrespondentsResponse,
@@ -12,8 +12,13 @@ import {DocListItem} from './components/DocListItem';
 import {fetchDocumentTags} from './utils/fetchDocumentTags';
 import {fetchDocumentTypes} from './utils/fetchDocumentTypes';
 import {fetchCorrespondents} from './utils/fetchCorrespondents';
+import {Preferences} from './models/preferences.model';
+import {DocGridItem} from './components/DocGridItem';
 
 export default function DocumentList() {
+
+    const {gridMode}: Preferences = getPreferenceValues();
+
     const [results, setResults] = useState<paperlessFetchResponse>();
     const [tags, setTags] = useState<paperlessDocumentTagsResponse>();
     const [types, setTypes] = useState<paperlessDocumentTypesResponse>();
@@ -65,24 +70,50 @@ export default function DocumentList() {
         }
     };
 
-    return (
-        <List
-            isLoading={loading}
-            isShowingDetail={true}
-            searchBarPlaceholder={`Search documents, like "Steuer"…`}
-            onSearchTextChange={onSearchTextChange}
-            throttle
-        >
-            {results?.results.length
-                ? results.results.map((document) => {
-                    return <DocListItem
-                        key={document.id}
-                        document={document}
-                        type={getDocumentType(document)}
-                        correspondent={getCorrespondent(document)}
-                        tags={stringifyTags(document)}/>;
-                })
-                : null}
-        </List>
-    );
+
+    if (gridMode) {
+        return (
+            <Grid
+                aspectRatio={'2/3'}
+                columns={5}
+                fit={Grid.Fit.Fill}
+                isLoading={loading}
+                onSearchTextChange={onSearchTextChange}
+                navigationTitle="Search Paperless"
+                searchBarPlaceholder={`Search documents, like "Steuer"…`}
+                throttle={true}
+            >
+                {results?.results.length
+                    ? results.results.map((document) => {
+                        return <DocGridItem key={document.id}
+                                            document={document}
+                                            type={getDocumentType(document)}
+                                            correspondent={getCorrespondent(document)}
+                                            tags={stringifyTags(document)}/>;
+                    })
+                    : null}
+            </Grid>
+        );
+    } else {
+        return (
+            <List
+                isLoading={loading}
+                isShowingDetail={true}
+                searchBarPlaceholder={`Search documents, like "Steuer"…`}
+                onSearchTextChange={onSearchTextChange}
+                throttle
+            >
+                {results?.results.length
+                    ? results.results.map((document) => {
+                        return <DocListItem
+                            key={document.id}
+                            document={document}
+                            type={getDocumentType(document)}
+                            correspondent={getCorrespondent(document)}
+                            tags={stringifyTags(document)}/>;
+                    })
+                    : null}
+            </List>
+        );
+    }
 }
