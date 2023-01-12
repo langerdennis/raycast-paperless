@@ -66,7 +66,11 @@ export default function DocumentList() {
                 const tagName = tags.results.find((tagResult) => tagResult.id === tag);
                 return tagName?.name;
             });
-            return tagNames?.join(', ');
+            
+            // Remove undefined tags (it seems that Paperless inbox associated tag is not returned by the API in the /tags path)
+            const definedTags = tagNames.filter((tag) => tag);
+
+            return definedTags?.join(', ');
         }
     };
 
